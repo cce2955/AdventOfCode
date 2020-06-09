@@ -1,4 +1,4 @@
-package main;
+package fuelCalc;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -39,6 +39,7 @@ public class FuelCalculation {
 		  }
 		setTotalFuel(intArr);
 		return getTotalFuel(); 
+		//Day 1 Answer should produce 5020494 or day 2? I'm not sure but it's done
 	}
 	public int getFuel() {
 		return fuel;
