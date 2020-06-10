@@ -8,16 +8,21 @@ import passwordCheck.PassWordCheck;
 
 public class Main {
 	public static void main(String[] args) throws IOException {
-		PassWordCheck pass = new PassWordCheck();
-		
-		int x = 0;
-		int start = 278384;
-		while (start <= 824795 ) {
-			if(pass.parsePassWord(start)) {
-				x++;
+			PassWordCheck pass = new PassWordCheck();
+			
+			//278384-824795
+			int truest = 0;
+			int x = 278384;
+			int y = 823000 ;
+			while (x <= 824795) {
+				if(pass.check(x)) {
+					truest++;
+					
+				}
+				x++;			
 			}
-			start++;
-		}
-		System.out.println(x);
+			
+			System.out.println(truest);
 	}
 }
+
