@@ -30,6 +30,7 @@ public class FuelCalculation {
 	public ArrayList<Integer> gatherFromSource(File file) throws NumberFormatException, IOException{
 		//Call this method with the file to generate an array of values
 		ArrayList<Integer> intArr = new ArrayList<>();
+		@SuppressWarnings("resource")
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		String st; 
 		while ((st = br.readLine()) != null) {
