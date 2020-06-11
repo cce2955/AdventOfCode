@@ -1,14 +1,7 @@
 package orbit;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Enumeration;
-import java.util.HashMap;
 import java.util.TreeMap;
-import java.util.TreeSet;
-import java.lang.Object;
-import javax.swing.tree.TreeNode;
-import javax.xml.soap.Node;
 
 public class Orbit {
 /*COM)B
@@ -28,7 +21,7 @@ K)L*/
 	//The first treemap monitors how many planets are orbiting around the Key
 	
 	TreeMap<String, Integer> orbitTreeMap = new TreeMap<>();
-	TreeMap<String,String> orbitPairMap = new TreeMap<>();
+	
 	public void findOrbit(String[] input) {
 		ArrayList<String> Orbitee = new ArrayList<>();
 		ArrayList<String> Orbiter = new ArrayList<>();
@@ -43,27 +36,35 @@ K)L*/
 			//Create Arraylist of planets that are orbiting
 			Orbiter.add(sb.substring(sb.indexOf(")") + 1, sb.length()));
 			sb.delete(0, sb.length());
-	
-			//init orbit counter
-			orbitPairMap.put(Orbitee.get(i), Orbiter.get(i));
+			
+			
 		}
 		
-        
-        
-		for(String plt : orbitPairMap.keySet()) {
-			if (orbitPairMap.containsKey(plt)){
-				try {
-					orbitTreeMap.put(plt, orbitTreeMap.get(plt) + 1);
-				} catch (NullPointerException e) {
-					orbitTreeMap.put(plt, 0);
+		for (int i = 0; i < Orbitee.size(); i++) {
+			ArrayList<String> hold = new ArrayList<>();
+			//Do a Reverse for loop, see if orbitee is in last index, skip if not
+			//increment if so
+			for (int x = i; x >= 0; x--) {
+				hold.add(Orbitee.get(x));
+				if(hold.contains(Orbitee.get(x))) {
+					
+					try{
+						orbitTreeMap.put(Orbitee.get(x), orbitTreeMap.get(Orbitee.get(x)) + 1);
+					}catch (NullPointerException e) {
+						orbitTreeMap.put(Orbitee.get(x), 0);
+					}
 				}
-				
-	         }
-			 
-			System.out.println("planet " + plt + " orbits " + orbitPairMap.get(plt));
-		}
-		System.out.println(orbitPairMap.size());
+				//System.out.println(Orbitee.get(x) + " " + Orbiter.get(x));
+			}
 			
+			hold.clear();
+			
+		}
+		System.out.println(orbitTreeMap);
+		orbitTreeMap.forEach((key, value) ->{
+			setNum(getNum() + value);
+		});
+		System.out.println(getNum());
 	}
 	public int getNum() {
 		return num;
