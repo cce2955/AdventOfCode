@@ -10,7 +10,7 @@ public class OpCode {
 	
 	private ArrayList<Integer> opCodeArr = new ArrayList<>();
 	
-	private enum intCodeState{
+	protected enum intCodeState{
 		ADDITION, MULTIPLY, EXIT, IGNORE;
 	}
 	
@@ -29,26 +29,26 @@ public class OpCode {
 	
 
 	
-	public ArrayList<Integer> runOpProgram() {
+	public ArrayList<Integer> runOpProgram(ArrayList<Integer> input) {
 		setQuit(false);
-		for (int i = 0; i < getOpCodeArr().size(); i++) {
+		for (int i = 0; i < input.size(); i++) {
 			if(i % 4 == 0) {
-				setiCState(getOpCodeArr().get(i));
+				setiCState(input.get(i));
 			}
 			switch (getiCState()) {
 			case ADDITION:
 				//Set whatever position returns at the fouth index
 				//by adding whatever is produced from the second and third index
-				getOpCodeArr().set(getOpCodeArr().get(i+3), 
-						add(getOpCodeArr().get(getOpCodeArr().get(i+1)), 
-								getOpCodeArr().get(getOpCodeArr().get(i+2))));
+				input.set(input.get(i+3), 
+						add(input.get(input.get(i+1)), 
+								input.get(input.get(i+2))));
 
 				setiCState(0);//Set it back to ignore
 				break;
 			case MULTIPLY:
-				getOpCodeArr().set(getOpCodeArr().get(i+3), 
-						mul(getOpCodeArr().get(getOpCodeArr().get(i+1)), 
-								getOpCodeArr().get(getOpCodeArr().get(i+2))));
+				input.set(input.get(i+3), 
+						mul(input.get(input.get(i+1)), 
+								input.get(input.get(i+2))));
 				
 				setiCState(0);//Set it back to ignore
 				break;
@@ -64,7 +64,7 @@ public class OpCode {
 				break;
 			}
 		}
-		return getOpCodeArr();
+		return input;
 		
 	}
 	public ArrayList<Integer> getOpCodeArr() {
@@ -81,10 +81,10 @@ public class OpCode {
 	public intCodeState getiCState() {
 		return iCState;
 	}
-	private int add (int num, int num2) {
+	protected int add (int num, int num2) {
 		return num + num2;
 	}
-	private int mul (int num, int num2) {
+	protected int mul (int num, int num2) {
 		return num * num2;
 	}
 	public boolean isQuit() {
